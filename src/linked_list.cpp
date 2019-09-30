@@ -59,6 +59,26 @@ T* LinkedList<T>::get(int i){
 }
 
 template<class T>
+Cell<T>* LinkedList<T>::get_cell(int i){
+    Cell<T>* cell;
+    if(i >= this->size || i < -this->size){
+        return nullptr;
+    }
+    else{
+        if(i < 0){
+            i = this->size + i;
+        }
+        if(i <= (float)this->size/2.0){
+            cell = this->from_front(i);
+        }
+        else{
+            cell = this->from_back((this->size-i)-1);
+        }
+        return cell;
+    }
+}
+
+template<class T>
 Cell<T>* LinkedList<T>::from_back(int i){
     int cell_i = 0;
     for (Cell<T>* cell = this->last; cell != nullptr; cell = cell->prev, cell_i++){
@@ -83,17 +103,29 @@ Cell<T>* LinkedList<T>::from_front(int i){
 template<class T>
 void LinkedList<T>::remove(int i){
     int cell_i = 0;
-    if(i >= this->size){
+    if(i >= this->size || i < -this->size){
         return;
     }
-    else if(i == 0){
-
+    else if(i == 0 || i == -this->size){
+        Cell<T>* cell = this->first;
+        this->first = cell->next;
+        delete cell->object;
+        delete cell;
     }
-    for (Cell<T>* cell = this->first->next; cell != nullptr; cell = cell->next, cell_i++){
-        if(cell_i == i){
-            
-        }
+    else if(i == this->size-1 || i == -1){
+        Cell<T>* cell = this->last;
+        this->last = cell->prev;
+        delete cell->object;
+        delete cell;
     }
+    else{
+        Cell<T>* cell = this->get_cell(i);
+        cell->prev->next = cell->next;
+        cell->next->prev = cell->prev;
+        delete cell->object;
+        delete cell;
+    }
+    --this->size;
 }
 
 template<class T>

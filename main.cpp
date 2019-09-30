@@ -1,5 +1,6 @@
 #include<iostream>
 #include"./include/linked_list.hpp"
+#include"./include/stack.hpp"
 #include"./include/vessel.hpp"
 
 int main(int argc, char const *argv[]){
@@ -10,6 +11,7 @@ int main(int argc, char const *argv[]){
     Vessel* v4 = new Vessel(80);
     Vessel* v5 = new Vessel(100);
     LinkedList<Vessel>* list = new LinkedList<Vessel>();
+    Stack<Vessel>* stack = new Stack<Vessel>();
     list->add(v1);
     list->add(v2);
     list->add(v3);
@@ -20,6 +22,13 @@ int main(int argc, char const *argv[]){
     for (int i = 0; i < list->length(); i++){
         Vessel* vessel = list->get(i);
         std::cout << vessel->get_capacity() << std::endl;
+        stack->push(vessel);
+    }
+
+    while(stack->length() > 0){
+        Vessel* vessel = stack->pop();
+        std::cout << vessel->get_capacity() << std::endl;
+        std::cout << stack->length() << std::endl;
     }
     
     return 0;
