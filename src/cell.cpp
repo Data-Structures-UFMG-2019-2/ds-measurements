@@ -1,4 +1,5 @@
 #include "../include/cell.hpp"
+#include "../include/vessel.hpp"
 
 template<class T>
 Cell<T>::Cell(T* object){
@@ -10,3 +11,5 @@ Cell<T>::Cell(T* object){
 template<class T>
 Cell<T>::~Cell(){
 }
+
+template class Cell<Vessel>;

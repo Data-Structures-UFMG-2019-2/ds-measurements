@@ -1,25 +1,30 @@
 #include<string>
 #include<sstream>
+#include<iostream>
 
 #include"../include/linked_list.hpp"
+#include"../include/vessel.hpp"
 
-LinkedList::LinkedList(){
+template<class T>
+LinkedList<T>::LinkedList(){
     this->size = 0;
     this->first = nullptr;
     this->last = nullptr;
 }
 
-LinkedList::~LinkedList(){
+template<class T>
+LinkedList<T>::~LinkedList(){
 
 }
 
-int LinkedList::length(){
+template<class T>
+int LinkedList<T>::length(){
     return this->size;
 }
 
-template <class T>
-void LinkedList::add(T* object){
-    Cell<T> cell = new Cell<T>(object);
+template<class T>
+void LinkedList<T>::add(T* object){
+    Cell<T>* cell = new Cell<T>(object);
 
     if(this->size == 0){
         this->first = cell;
@@ -30,10 +35,11 @@ void LinkedList::add(T* object){
         this->last->next = cell;
         this->last = cell;
     }
+    ++this->size;
 }
 
-template <class T>
-T* LinkedList::get(int i){
+template<class T>
+T* LinkedList<T>::get(int i){
     Cell<T>* cell;
     if(i >= this->size || i < -this->size){
         return nullptr;
@@ -46,15 +52,16 @@ T* LinkedList::get(int i){
             cell = this->from_front(i);
         }
         else{
-            cell = this->from_back(i-this->size-1);
+            cell = this->from_back((this->size-i)-1);
         }
         return cell != nullptr ? cell->object : nullptr;
     }
 }
 
-Cell<class T>* LinkedList::from_back(int i){
+template<class T>
+Cell<T>* LinkedList<T>::from_back(int i){
     int cell_i = 0;
-    for (Cell<class T>* cell = this->last; cell != nullptr; cell = cell->prev, cell_i++){
+    for (Cell<T>* cell = this->last; cell != nullptr; cell = cell->prev, cell_i++){
         if(cell_i == i){
             return cell;
         }
@@ -62,9 +69,10 @@ Cell<class T>* LinkedList::from_back(int i){
     return nullptr;
 }
 
-Cell<class T>* LinkedList::from_front(int i){
+template<class T>
+Cell<T>* LinkedList<T>::from_front(int i){
     int cell_i = 0;
-    for (Cell<class T>* cell = this->first; cell != nullptr; cell = cell->next, cell_i++){
+    for (Cell<T>* cell = this->first; cell != nullptr; cell = cell->next, cell_i++){
         if(cell_i == i){
             return cell;
         }
@@ -72,7 +80,8 @@ Cell<class T>* LinkedList::from_front(int i){
     return nullptr;
 }
 
-void LinkedList::remove(int i){
+template<class T>
+void LinkedList<T>::remove(int i){
     int cell_i = 0;
     if(i >= this->size){
         return;
@@ -80,9 +89,19 @@ void LinkedList::remove(int i){
     else if(i == 0){
 
     }
-    for (Cell<class T>* cell = this->first->next; cell != nullptr; cell = cell->next, cell_i++){
+    for (Cell<T>* cell = this->first->next; cell != nullptr; cell = cell->next, cell_i++){
         if(cell_i == i){
             
         }
     }
 }
+
+template<class T>
+void LinkedList<T>::print(){
+    int cell_i = 0;
+    for (Cell<T>* cell = this->first; cell != nullptr; cell = cell->next, cell_i++){
+        std::cout << cell_i << std::endl;
+    }
+}
+
+template class LinkedList<Vessel>;
