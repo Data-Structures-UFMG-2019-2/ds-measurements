@@ -1,5 +1,8 @@
 #include"./cell.hpp"
 
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+
 class LinkedList{
     private:
         int size;
@@ -15,3 +18,5 @@ class LinkedList{
         template<class T> T* get(int i);
         void remove(int i);
 };
+
+#endif

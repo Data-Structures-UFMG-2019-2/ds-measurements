@@ -1,3 +1,6 @@
+#include<string>
+#include<sstream>
+
 #include"../include/linked_list.hpp"
 
 LinkedList::LinkedList(){
@@ -32,13 +35,13 @@ void LinkedList::add(T* object){
 template <class T>
 T* LinkedList::get(int i){
     Cell<T>* cell;
-    if(i < 0){
-        i = this->size + i;
-    }
-    if(i >= this->size){
+    if(i >= this->size || i < -this->size){
         return nullptr;
     }
     else{
+        if(i < 0){
+            i = this->size + i;
+        }
         if(i <= (float)this->size/2.0){
             cell = this->from_front(i);
         }

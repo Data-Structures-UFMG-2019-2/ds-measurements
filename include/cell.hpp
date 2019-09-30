@@ -1,3 +1,6 @@
+#ifndef CELL_H
+#define CELL_H
+
 template <class T>
 class Cell{
     private:
@@ -10,3 +13,5 @@ class Cell{
         Cell(T* object);
         ~Cell();
 };
+
+#endif
