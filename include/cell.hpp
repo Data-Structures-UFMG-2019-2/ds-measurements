@@ -1,6 +1,9 @@
 #ifndef CELL_H
 #define CELL_H
 
+#define FORWARD 1
+#define BACKWARD 0
+
 template <class T> class LinkedList;
 template <class T> class Stack;
 
@@ -16,6 +19,7 @@ class Cell{
     public:
         Cell(T* object);
         ~Cell();
+        void cascade_clear(int direction);
 };
 
 #endif

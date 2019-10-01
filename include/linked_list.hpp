@@ -19,7 +19,7 @@ class LinkedList{
         void add(T* object);
         T* get(int i);
         void remove(int i);
-        void print();
+        void clear();
 };
 
 #endif

@@ -129,11 +129,12 @@ void LinkedList<T>::remove(int i){
 }
 
 template<class T>
-void LinkedList<T>::print(){
-    int cell_i = 0;
-    for (Cell<T>* cell = this->first; cell != nullptr; cell = cell->next, cell_i++){
-        std::cout << cell_i << std::endl;
-    }
+void LinkedList<T>::clear(){
+    this->first->cascade_clear(FORWARD);
+    delete this->first;
+    this->first = nullptr;
+    this->last = nullptr;
+    this->size = 0;
 }
 
 template class LinkedList<Vessel>;

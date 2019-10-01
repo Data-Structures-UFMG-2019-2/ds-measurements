@@ -18,7 +18,6 @@ int main(int argc, char const *argv[]){
     list->add(v4);
     list->add(v5);
 
-    // list->print();
     for (int i = 0; i < list->length(); i++){
         Vessel* vessel = list->get(i);
         std::cout << vessel->get_capacity() << std::endl;
@@ -30,6 +29,10 @@ int main(int argc, char const *argv[]){
         std::cout << vessel->get_capacity() << std::endl;
         std::cout << stack->length() << std::endl;
     }
+
+    list->clear();
+    delete list;
+    delete stack;
     
     return 0;
 }
