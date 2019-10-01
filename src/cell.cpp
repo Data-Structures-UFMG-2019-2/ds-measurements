@@ -17,7 +17,6 @@ void Cell<T>::cascade_clear(int direction){
     if(direction == FORWARD){
         if(this->next != nullptr){
             this->next->cascade_clear(FORWARD);
-            delete this->object;
             delete this->next;
         }
     }
@@ -25,9 +24,9 @@ void Cell<T>::cascade_clear(int direction){
         if(this->prev != nullptr){
             this->prev->cascade_clear(BACKWARD);
             delete this->prev;
-            delete this->object;
         }
     }
+    delete this->object;
 }
 
 template class Cell<Vessel>;
