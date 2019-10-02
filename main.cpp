@@ -1,6 +1,5 @@
 #include<iostream>
 #include"./include/linked_list.hpp"
-#include"./include/stack.hpp"
 #include"./include/vessel.hpp"
 #include"./include/measure.hpp"
 
