@@ -12,3 +12,7 @@ Operation::~Operation(){
 int Operation::get_measured_amount(){
     return this->measured_amount;
 }
+
+int Operation::get_vessel_amount(){
+    return this->vessel_amount;
+}

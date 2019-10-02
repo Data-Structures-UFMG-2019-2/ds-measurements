@@ -1,3 +1,4 @@
+#include<iostream>
 #include"../include/measure.hpp"
 #include"../include/linked_list.hpp"
 #include"../include/operation.hpp"
@@ -27,24 +28,49 @@ void Measure::remove_vessel(LinkedList<Vessel>* vessels, int q){
 
 int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
     LinkedList<Operation>* operations = new LinkedList<Operation>();
-    int used = 1;
+    Vessel* vessel;
+    Operation* operation;
+    int amount, measured_amount;
 
     for (Cell<Vessel>* it = vessels->begin(); it != nullptr; it = it->get_next()){
-        Vessel* vessel = it->get_object();
-        int amount = vessel->get_capacity();
+        vessel = it->get_object();
+        amount = vessel->get_capacity();
         if(amount == q){
             operations->clear();
             delete operations;
-            return used;
+            // std::cout << "Pronto!" << std::endl;
+            return 1;
         }
-        operations->add(new Operation(used, amount));
+        operations->add(new Operation(1, amount));
+        // std::cout << "Calculando..." << std::endl;
     }
-    while(true){
-        for (Cell<Operation>* it = operations->begin(); it != nullptr; it = it->get_next()){
-            
+    while(operations->length() > 0){
+        Operation* operation = operations->remove(0);
+        measured_amount = operation->get_measured_amount();
+        for (Cell<Vessel>* it = vessels->begin(); it != nullptr; it = it->get_next()){
+            vessel = it->get_object();
+            amount = vessel->get_capacity();
+            if((measured_amount + amount == q) || (measured_amount - amount == q)){
+                int result = operation->get_vessel_amount()+1;
+                delete operation;
+                operations->clear();
+                delete operations;
+                // std::cout << "Pronto!" << std::endl;
+                return result;
+            }
+            else{
+                operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount + amount));
+                if((measured_amount - amount) > 0){
+                    operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount - amount));
+                }
+                // std::cout << "Calculando..." << std::endl;
+            }
         }
+        delete operation;
     }
+    operations->clear();
     delete operations;
+    return -1;
 }
 
 void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
@@ -58,7 +84,7 @@ void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
             break;
 
         case 'p':
-            Measure::min_measure(vessels, q);
+            std::cout << Measure::min_measure(vessels, q) << std::endl;
             break;
 
         default:

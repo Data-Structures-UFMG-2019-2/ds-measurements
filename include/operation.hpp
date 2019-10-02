@@ -11,6 +11,7 @@ class Operation{
         Operation(int vessel_amount, int measured_amount);
         ~Operation();
         int get_measured_amount();
+        int get_vessel_amount();
 };
 
 #endif
