@@ -13,6 +13,26 @@ Cell<T>::~Cell(){
 }
 
 template<class T>
+Cell<T>* Cell<T>::operator++(){
+    return this->next;
+}
+
+template<class T>
+Cell<T>* Cell<T>::operator--(){
+    return this->prev;
+}
+
+template<class T>
+T* Cell<T>::get_object(){
+    return this->object;
+}
+
+template<class T>
+Cell<T>* Cell<T>::get_next(){
+    return this->next;
+}
+
+template<class T>
 void Cell<T>::cascade_clear(int direction){
     if(direction == FORWARD){
         if(this->next != nullptr){

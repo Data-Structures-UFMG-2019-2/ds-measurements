@@ -1,7 +1,7 @@
-#include"./cell.hpp"
-
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
+
+#include"./cell.hpp"
 
 template <class T>
 class LinkedList{
@@ -11,14 +11,15 @@ class LinkedList{
         Cell<T>* last;
         Cell<T>* from_back(int i);
         Cell<T>* from_front(int i);
-        Cell<T>* get_cell(int i);
     public:
         LinkedList();
         ~LinkedList();
         int length();
         void add(T* object);
         T* get(int i);
-        void remove(int i);
+        Cell<T>* begin();
+        Cell<T>* get_cell(int i);
+        T* remove(int i);
         void clear();
 };
 

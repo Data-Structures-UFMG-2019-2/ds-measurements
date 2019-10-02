@@ -19,6 +19,10 @@ class Cell{
     public:
         Cell(T* object);
         ~Cell();
+        Cell<T>* operator++();
+        Cell<T>* operator--();
+        T* get_object();
+        Cell<T>* get_next();
         void cascade_clear(int direction);
 };
 
