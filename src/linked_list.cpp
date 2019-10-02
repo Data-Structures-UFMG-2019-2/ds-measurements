@@ -114,23 +114,28 @@ T* LinkedList<T>::remove(int i){
     if(i >= this->size || i < -this->size){
         return nullptr;
     }
+    else if(this->size == 1){
+        cell = this->first;
+        this->first = nullptr;
+        this->last = nullptr;
+    }
     else if(i == 0 || i == -this->size){
         cell = this->first;
-        object = cell->object;
+        cell->next->prev = nullptr;
         this->first = cell->next;
     }
     else if(i == this->size-1 || i == -1){
         cell = this->last;
-        object = cell->object;
+        cell->prev->next = nullptr;
         this->last = cell->prev;
     }
     else{
         cell = this->get_cell(i);
-        object = cell->object;
         cell->prev->next = cell->next;
         cell->next->prev = cell->prev;
     }
     --this->size;
+    object = cell->object;
     delete cell;
     return object;
 }
