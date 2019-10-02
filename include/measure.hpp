@@ -13,7 +13,7 @@ class Measure{
         ~Measure();
         static void add_vessel(LinkedList<Vessel>* vessels, int q);
         static void remove_vessel(LinkedList<Vessel>* vessels, int q);
-        static void min_measure(LinkedList<Vessel>* vessels, int q);
+        static int min_measure(LinkedList<Vessel>* vessels, int q);
         static void execute(LinkedList<Vessel>* vessels, char type, int q);
 };
 

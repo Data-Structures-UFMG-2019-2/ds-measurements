@@ -4,6 +4,7 @@
 
 #include"../include/linked_list.hpp"
 #include"../include/vessel.hpp"
+#include"../include/operation.hpp"
 
 template<class T>
 LinkedList<T>::LinkedList(){
@@ -146,3 +147,4 @@ void LinkedList<T>::clear(){
 }
 
 template class LinkedList<Vessel>;
+template class LinkedList<Operation>;

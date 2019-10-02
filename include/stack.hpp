@@ -15,6 +15,7 @@ class Stack{
         void push(T* object);
         T* pop();
         T* peek();
+        void clear();
 };
 
 #endif

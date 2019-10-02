@@ -1,5 +1,6 @@
 #include "../include/cell.hpp"
 #include "../include/vessel.hpp"
+#include "../include/operation.hpp"
 
 template<class T>
 Cell<T>::Cell(T* object){
@@ -50,3 +51,4 @@ void Cell<T>::cascade_clear(int direction){
 }
 
 template class Cell<Vessel>;
+template class Cell<Operation>;

@@ -1,5 +1,5 @@
 #include"../include/stack.hpp"
-#include"../include/vessel.hpp"
+#include"../include/operation.hpp"
 
 template<class T>
 Stack<T>::Stack(){
@@ -47,4 +47,14 @@ T* Stack<T>::peek(){
     return this->top->object;
 }
 
-template class Stack<Vessel>;
+template<class T>
+void Stack<T>::clear(){
+    if(this->size > 0){
+        this->top->cascade_clear(BACKWARD);
+        delete this->top;
+        this->top = nullptr;
+        this->size = 0;
+    }
+}
+
+template class Stack<Operation>;
