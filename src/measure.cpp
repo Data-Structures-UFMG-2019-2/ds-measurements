@@ -36,14 +36,13 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
         vessel = it->get_object();
         amount = vessel->get_capacity();
         if(amount == q){
-            operations->clear();
+            operations->clear(ITERATIVE);
             delete operations;
-            std::cout << "Pronto!" << std::endl;
             return 1;
         }
         operations->add(new Operation(1, amount));
-        std::cout << "Calculando, temos " << amount << "..." << std::endl;
     }
+
     while(operations->length() > 0){
         Operation* operation = operations->remove(0);
         measured_amount = operation->get_measured_amount();
@@ -53,17 +52,14 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
             if((measured_amount + amount == q) || (measured_amount - amount == q)){
                 int result = operation->get_vessel_amount()+1;
                 delete operation;
-                operations->clear();
+                operations->clear(ITERATIVE);
                 delete operations;
-                std::cout << "Pronto!" << std::endl;
                 return result;
             }
             else{
                 operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount + amount));
-                std::cout << "Calculando, temos " << measured_amount+amount << "..." << std::endl;
                 if((measured_amount - amount) > 0){
                     operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount - amount));
-                    std::cout << "Calculando, temos " << measured_amount-amount << "..." << std::endl;
                 }
             }
         }
@@ -79,12 +75,12 @@ void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
     switch (type){
         case 'i':
             Measure::add_vessel(vessels, q);
-            Measure::print_vessels(vessels);
+            // Measure::print_vessels(vessels);
             break;
 
         case 'r':
             Measure::remove_vessel(vessels, q);
-            Measure::print_vessels(vessels);
+            // Measure::print_vessels(vessels);
             break;
 
         case 'p':

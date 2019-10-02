@@ -2,7 +2,6 @@
 #define MEASURE_H
 
 #include"./linked_list.hpp"
-#include"./stack.hpp"
 #include"./vessel.hpp"
 
 class Measure{

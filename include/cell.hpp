@@ -13,6 +13,7 @@ class Cell{
         T* object;
         Cell* next;
         Cell* prev;
+        void cascade_clear(int direction);
 
         friend class LinkedList<T>;
         friend class Stack<T>;
@@ -23,7 +24,6 @@ class Cell{
         Cell<T>* operator--();
         T* get_object();
         Cell<T>* get_next();
-        void cascade_clear(int direction);
 };
 
 #endif

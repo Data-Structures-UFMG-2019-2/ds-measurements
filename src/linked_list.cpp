@@ -31,10 +31,66 @@ void LinkedList<T>::add(T* object){
         this->first = cell;
         this->last = cell;
     }
-    else if(this->size > 0){
+    else{
         cell->prev = this->last;
         this->last->next = cell;
         this->last = cell;
+    }
+    ++this->size;
+}
+
+template<class T>
+void LinkedList<T>::insert_after(Cell<T>* cell, T* object){
+    Cell<T>* new_cell = new Cell<T>(object);
+    if(cell == nullptr){ // Insert at the beginning of the list when cell == NULL
+        if(this->size == 0){
+            this->first = cell;
+            this->last = cell;
+        }
+        else{
+            new_cell->next = this->first;
+            this->first->prev = new_cell;
+            this->first = new_cell;
+        }
+    }
+    else{
+        new_cell->prev = cell;
+        new_cell->next = cell->next;
+        cell->next = new_cell;
+        if(cell == this->last){
+            this->last = new_cell;
+        }
+        else{
+            new_cell->next->prev = new_cell;
+        }
+    }
+    ++this->size;
+}
+
+template<class T>
+void LinkedList<T>::insert_before(Cell<T>* cell, T* object){
+    Cell<T>* new_cell = new Cell<T>(object);
+    if(cell == nullptr){ // Insert at the end of the list when cell == NULL
+        if(this->size == 0){
+            this->first = cell;
+            this->last = cell;
+        }
+        else{
+            new_cell->prev = this->last;
+            this->last->next = new_cell;
+            this->last = new_cell;
+        }
+    }
+    else{
+        new_cell->next = cell;
+        new_cell->prev = cell->prev;
+        cell->prev = new_cell;
+        if(cell == this->first){
+            this->first = new_cell;
+        }
+        else{
+            new_cell->prev->next = new_cell;
+        }
     }
     ++this->size;
 }
@@ -46,13 +102,13 @@ T* LinkedList<T>::get(int i){
         return nullptr;
     }
     else{
-        if(i < 0){
+        if(i < 0){ // Negative indexes get cells from the end of the list
             i = this->size + i;
         }
-        if(i <= (float)this->size/2.0){
+        if(i <= (float)this->size/2.0){ // If the cell is closer to the front
             cell = this->from_front(i);
         }
-        else{
+        else{ // If the cell is closer to the back
             cell = this->from_back((this->size-i)-1);
         }
         return cell != nullptr ? cell->object : nullptr;
@@ -85,7 +141,7 @@ Cell<T>* LinkedList<T>::get_cell(int i){
 }
 
 template<class T>
-Cell<T>* LinkedList<T>::from_back(int i){
+Cell<T>* LinkedList<T>::from_back(int i){ // return i-th cell (starting at the end)
     int cell_i = 0;
     for (Cell<T>* cell = this->last; cell != nullptr; cell = cell->prev, cell_i++){
         if(cell_i == i){
@@ -96,7 +152,7 @@ Cell<T>* LinkedList<T>::from_back(int i){
 }
 
 template<class T>
-Cell<T>* LinkedList<T>::from_front(int i){
+Cell<T>* LinkedList<T>::from_front(int i){ // return i-th cell (starting at the beginning)
     int cell_i = 0;
     for (Cell<T>* cell = this->first; cell != nullptr; cell = cell->next, cell_i++){
         if(cell_i == i){
@@ -148,6 +204,24 @@ void LinkedList<T>::clear(){
         this->first = nullptr;
         this->last = nullptr;
         this->size = 0;
+    }
+}
+
+template<class T>
+void LinkedList<T>::clear(int strategy){
+    if(strategy == ITERATIVE){
+        while(this->size > 0){
+            delete this->remove(0);
+        }
+    }
+    else if(strategy == RECURSIVE){
+        if(this->size > 0){
+            this->first->cascade_clear(FORWARD);
+            delete this->first;
+            this->first = nullptr;
+            this->last = nullptr;
+            this->size = 0;
+        }
     }
 }
 
