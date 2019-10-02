@@ -15,6 +15,7 @@ class Measure{
         static void remove_vessel(LinkedList<Vessel>* vessels, int q);
         static int min_measure(LinkedList<Vessel>* vessels, int q);
         static void execute(LinkedList<Vessel>* vessels, char type, int q);
+        static void print_vessels(LinkedList<Vessel>* vessels);
 };
 
 #endif

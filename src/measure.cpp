@@ -38,11 +38,11 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
         if(amount == q){
             operations->clear();
             delete operations;
-            // std::cout << "Pronto!" << std::endl;
+            std::cout << "Pronto!" << std::endl;
             return 1;
         }
         operations->add(new Operation(1, amount));
-        // std::cout << "Calculando..." << std::endl;
+        std::cout << "Calculando, temos " << amount << "..." << std::endl;
     }
     while(operations->length() > 0){
         Operation* operation = operations->remove(0);
@@ -55,15 +55,16 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
                 delete operation;
                 operations->clear();
                 delete operations;
-                // std::cout << "Pronto!" << std::endl;
+                std::cout << "Pronto!" << std::endl;
                 return result;
             }
             else{
                 operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount + amount));
+                std::cout << "Calculando, temos " << measured_amount+amount << "..." << std::endl;
                 if((measured_amount - amount) > 0){
                     operations->add(new Operation(operation->get_vessel_amount() + 1, measured_amount - amount));
+                    std::cout << "Calculando, temos " << measured_amount-amount << "..." << std::endl;
                 }
-                // std::cout << "Calculando..." << std::endl;
             }
         }
         delete operation;
@@ -74,13 +75,16 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
 }
 
 void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
+    int cell_i = 0;
     switch (type){
         case 'i':
             Measure::add_vessel(vessels, q);
+            Measure::print_vessels(vessels);
             break;
 
         case 'r':
             Measure::remove_vessel(vessels, q);
+            Measure::print_vessels(vessels);
             break;
 
         case 'p':
@@ -90,4 +94,19 @@ void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
         default:
             break;
     }
+}
+
+void Measure::print_vessels(LinkedList<Vessel>* vessels){
+    int cell_i = 0;
+    std::cout << '[';
+    for (Cell<Vessel>* it = vessels->begin(); it != nullptr; it = it->get_next(), cell_i++){
+        Vessel* vessel = it->get_object();
+        if(vessel != nullptr){
+            if(cell_i > 0){
+                std::cout << ", ";
+            }
+            std::cout << vessel->get_capacity();
+        }
+    }
+    std::cout << ']' << std::endl;
 }

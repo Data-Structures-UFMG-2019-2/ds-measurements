@@ -27,7 +27,8 @@
 *.lib
 
 # Executables
-*.exe
-*.out
-*.app
+build/*.exe
+build/*.out
+build/*.app
 build/measurements
+build/tp1

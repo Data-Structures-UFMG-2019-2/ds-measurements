@@ -1,7 +1,9 @@
 CC=g++
 STD=c++11
+CFLAGS=-Wall -Wextra
 
-TARGET_NAME=measurements
+TARGET_NAME=./tp1
+TMPOUT_NAME=tp1.testresult
 BUILD_PATH=./build
 SOURCE_PATH=./src
 LIB_PATH=./include
@@ -28,3 +30,6 @@ run:
 
 mem:
 	valgrind --leak-check=full --show-leak-kinds=all $(BUILD_PATH)/$(TARGET_NAME)
+
+test: $(EXEC)
+	@bash run_tests.sh $(BUILD_PATH)/$(TARGET_NAME) $(TMPOUT_NAME)
