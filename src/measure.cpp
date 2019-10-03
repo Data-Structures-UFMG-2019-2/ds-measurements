@@ -3,12 +3,6 @@
 #include"../include/linked_list.hpp"
 #include"../include/operation.hpp"
 
-Measure::Measure(){
-}
-
-Measure::~Measure(){
-}
-
 void Measure::add_vessel(LinkedList<Vessel>* vessels, int q){
     Vessel* vessel = new Vessel(q);
     vessels->add(vessel);

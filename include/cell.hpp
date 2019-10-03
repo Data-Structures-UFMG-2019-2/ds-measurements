@@ -24,6 +24,7 @@ class Cell{
         Cell<T>* operator--();
         T* get_object();
         Cell<T>* get_next();
+        Cell<T>* get_prev();
 };
 
 #endif

@@ -5,11 +5,7 @@
 #include"./vessel.hpp"
 
 class Measure{
-    private:
-        
     public:
-        Measure();
-        ~Measure();
         static void add_vessel(LinkedList<Vessel>* vessels, int q);
         static void remove_vessel(LinkedList<Vessel>* vessels, int q);
         static int min_measure(LinkedList<Vessel>* vessels, int q);

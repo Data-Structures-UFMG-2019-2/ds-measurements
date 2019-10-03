@@ -34,6 +34,11 @@ Cell<T>* Cell<T>::get_next(){
 }
 
 template<class T>
+Cell<T>* Cell<T>::get_prev(){
+    return this->prev;
+}
+
+template<class T>
 void Cell<T>::cascade_clear(int direction){
     if(direction == FORWARD){
         if(this->next != nullptr){
