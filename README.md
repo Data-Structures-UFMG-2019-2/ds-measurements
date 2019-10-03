@@ -30,7 +30,7 @@ ds_measurements
 |   ├── measure.cpp
 |   ├── operation.cpp
 |   └── vessel.cpp
-├── test
+├── tests
 |   ├── 00.in
 |   ├── 00.out
 |   ├── ...
