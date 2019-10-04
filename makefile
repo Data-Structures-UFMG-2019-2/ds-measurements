@@ -1,6 +1,6 @@
 CC=g++
 STD=c++11
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -std=$(STD)
 
 TARGET_NAME=./tp1
 TMPOUT_NAME=tp1.testresult
@@ -15,12 +15,11 @@ OBJECTS := $(patsubst $(SOURCE_PATH)/%,$(BUILD_PATH)/%,$(SOURCES:.$(SOURCE_EXT)=
 all: $(TARGET_NAME)
 
 $(BUILD_PATH)/%.o: $(SOURCE_PATH)/%.cpp $(LIB_PATH)/%.hpp
-	mkdir -p $(@D)
-	$(CC) -c -o $@ $<
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(TARGET_NAME): $(OBJECTS)
 	mkdir -p $(BUILD_PATH)
-	$(CC) -o $(BUILD_PATH)/$(TARGET_NAME) ./main.cpp $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(BUILD_PATH)/$(TARGET_NAME) ./main.cpp $(OBJECTS)
 
 clean:
 	rm -rf $(BUILD_PATH)/*

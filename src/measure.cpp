@@ -38,7 +38,7 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
     }
 
     while(operations->length() > 0){
-        Operation* operation = operations->remove(0);
+        operation = operations->remove(0);
         measured_amount = operation->get_measured_amount();
         for (Cell<Vessel>* it = vessels->begin(); it != nullptr; it = it->get_next()){
             vessel = it->get_object();
@@ -65,7 +65,6 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
 }
 
 void Measure::execute(LinkedList<Vessel>* vessels, char type, int q){
-    int cell_i = 0;
     switch (type){
         case 'i':
             Measure::add_vessel(vessels, q);

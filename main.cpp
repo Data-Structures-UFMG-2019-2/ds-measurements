@@ -3,7 +3,7 @@
 #include"./include/vessel.hpp"
 #include"./include/measure.hpp"
 
-int main(int argc, char const *argv[]){
+int main(){
     int q;
     char type;
     LinkedList<Vessel>* vessels = new LinkedList<Vessel>();
