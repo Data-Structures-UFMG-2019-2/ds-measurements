@@ -102,13 +102,13 @@ T* LinkedList<T>::get(int i){
         return nullptr;
     }
     else{
-        if(i < 0){ // Negative indexes get cells from the end of the list
+        if(i < 0){ // negative indexes get cells from the back of the list
             i = this->size + i;
         }
-        if(i <= (float)this->size/2.0){ // If the cell is closer to the front
+        if(i <= (float)this->size/2.0){ // if the cell is closer to the front
             cell = this->from_front(i);
         }
-        else{ // If the cell is closer to the back
+        else{ // if the cell is closer to the back
             cell = this->from_back((this->size-i)-1);
         }
         return cell != nullptr ? cell->object : nullptr;
@@ -121,7 +121,7 @@ Cell<T>* LinkedList<T>::begin(){
 }
 
 template<class T>
-Cell<T>* LinkedList<T>::get_cell(int i){
+Cell<T>* LinkedList<T>::get_cell(int i){ // negative values for i return cells from the back of the list
     Cell<T>* cell;
     if(i >= this->size || i < -this->size){
         return nullptr;
@@ -163,8 +163,7 @@ Cell<T>* LinkedList<T>::from_front(int i){ // return i-th cell (starting at the 
 }
 
 template<class T>
-T* LinkedList<T>::remove(int i){
-    int cell_i = 0;
+T* LinkedList<T>::remove(int i){ // negative values for i remove itens from the back of the list
     Cell<T>* cell = nullptr;
     T* object = nullptr;
     if(i >= this->size || i < -this->size){
@@ -175,12 +174,12 @@ T* LinkedList<T>::remove(int i){
         this->first = nullptr;
         this->last = nullptr;
     }
-    else if(i == 0 || i == -this->size){
+    else if(i == 0 || i == -this->size){ // cases where the element is first in the list
         cell = this->first;
         cell->next->prev = nullptr;
         this->first = cell->next;
     }
-    else if(i == this->size-1 || i == -1){
+    else if(i == this->size-1 || i == -1){ // cases where the element is last in the list
         cell = this->last;
         cell->prev->next = nullptr;
         this->last = cell->prev;
@@ -226,4 +225,3 @@ void LinkedList<T>::clear(int strategy){
 }
 
 template class LinkedList<Vessel>;
-template class LinkedList<Operation>;

@@ -4,8 +4,11 @@
 #define FORWARD 1
 #define BACKWARD 0
 
+#define RECURSIVE 1
+#define ITERATIVE -1
+
 template <class T> class LinkedList;
-template <class T> class Stack;
+template <class T> class Queue;
 
 template <class T>
 class Cell{
@@ -16,7 +19,7 @@ class Cell{
         void cascade_clear(int direction);
 
         friend class LinkedList<T>;
-        friend class Stack<T>;
+        friend class Queue<T>;
     public:
         Cell(T* object);
         ~Cell();

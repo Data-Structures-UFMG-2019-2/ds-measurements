@@ -1,6 +1,7 @@
 #include<iostream>
 #include"../include/measure.hpp"
 #include"../include/linked_list.hpp"
+#include"../include/queue.hpp"
 #include"../include/operation.hpp"
 
 void Measure::add_vessel(LinkedList<Vessel>* vessels, int q){
@@ -21,7 +22,7 @@ void Measure::remove_vessel(LinkedList<Vessel>* vessels, int q){
 }
 
 int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
-    LinkedList<Operation>* operations = new LinkedList<Operation>();
+    Queue<Operation>* operations = new Queue<Operation>();
     Vessel* vessel;
     Operation* operation;
     int amount, measured_amount;
@@ -38,7 +39,7 @@ int Measure::min_measure(LinkedList<Vessel>* vessels, int q){
     }
 
     while(operations->length() > 0){
-        operation = operations->remove(0);
+        operation = operations->remove();
         measured_amount = operation->get_measured_amount();
         for (Cell<Vessel>* it = vessels->begin(); it != nullptr; it = it->get_next()){
             vessel = it->get_object();

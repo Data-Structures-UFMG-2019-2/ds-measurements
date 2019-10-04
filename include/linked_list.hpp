@@ -1,9 +1,6 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#define RECURSIVE 1
-#define ITERATIVE -1
-
 #include"./cell.hpp"
 
 template <class T>
